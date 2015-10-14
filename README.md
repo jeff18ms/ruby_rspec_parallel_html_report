@@ -15,6 +15,7 @@ Ruby version
 CI/CD
 =====
 - This would be very useful to send the HTML report to the wider audience when run through CI Pipeline(jenkins).
+- Refer the screen shots in the docs directory, how to add this rake task in a jenkins job.
 
 Run!
 ====
