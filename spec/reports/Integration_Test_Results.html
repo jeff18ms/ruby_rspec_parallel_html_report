@@ -1,0 +1,326 @@
+<style type="text/css">
+  body {
+    line-height: 1.15;
+    font-size: 0.8em;
+    font-family: Helvetica, Sans-Serif;
+  }
+
+  .report-title {
+    margin-left: 10px;
+    font-size: 2em;
+    font-weight: bold;
+  }
+
+  .options {
+    display: inline-block;
+  }
+
+  .checkboxes {
+    float: relative;
+  }
+
+  .expand-all, .collapse-all {
+    color: #07c;
+    margin: 0px 5px;
+  }
+
+  .expand-all {
+    display: none;
+  }
+
+  .expand-all:hover, .collapse-all:hover {
+    color: #0c65a5;
+    cursor: hand;
+  }
+
+  .summary {
+    overflow: hidden;
+    margin: 0px 10px 10px 10px;
+    padding: 10px;
+    font-size: 1.5em;
+    border: 2px solid black;
+  }
+
+  .summary-line {
+    font-weight: bold;
+  }
+
+  .total-duration {
+    float: right;
+  }
+
+  .test {
+    overflow: hidden;
+    word-wrap: break-word;
+    margin: 5px 5px 5px 15px;
+    padding: 5px;
+  }
+
+  .test .run-time {
+    float: right;
+  }
+
+  .test-title {
+    overflow: hidden;
+    margin: 15px 5px 5px 5px;
+    color: black;
+    font-weight: bold;
+    font-size: 1.2em;
+    padding: 5px;
+    border-bottom-left-radius: 5px;
+    border-top-right-radius: 5px;
+  }
+
+  .test-title:hover {
+    cursor: hand;
+  }
+
+  .test-title .expand-collapse {
+    padding: 0px 7px 0px 3px;
+    display: inline-block;
+    width: 7px;
+    text-align: center;
+    color: white;
+    text-shadow: 2px 2px rgba(0,0,0,0.75);
+  }
+
+  .group-run-time {
+    float: right;
+  }
+
+  .test-title.passed {
+    border-bottom: 3px solid #10EC10;
+    background-color: #90FF90;
+  }
+
+  .test-title.failed {
+    border-bottom: 3px solid #F76C6C;
+    background-color: #FFA7A7;
+  }
+
+  .test.passed {
+    border-left: 5px solid #00EE00;
+    background-color: #CCFFCC;
+  }
+
+  .test.failed {
+    border-left: 5px solid #FF6666;
+    background-color: #FFD0D0;
+  }
+
+  .test.pending {
+    border-left: 5px solid #FFAB66;
+    background-color: #FFE3CC;
+  }
+
+  .failed-exception {
+    background-color: rgba(255, 255, 255, 0.5);
+    margin: 10px;
+    padding: 5px;
+    font-family: Courier;
+    color: #E3170D;
+    border-radius: 5px;
+  }
+
+  .backtrace-line {
+    font-size: 1.05em;
+    color: black;
+  }
+</style>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+<script type="text/javascript">
+  $(function () {
+    window.testFilter = function (filter) {
+      $('.test.'+filter).toggle();
+    }
+
+    $('.expand-all').on('click', function () {
+      $('.tests-container').show();
+      $('.expand-collapse').text('-');
+      $(this).hide()
+      $('.collapse-all').show();
+    });
+
+    $('.collapse-all').on('click', function () {
+      $('.tests-container').hide();
+      $('.expand-collapse').text('+');
+      $(this).hide()
+      $('.expand-all').show();
+    });
+
+    $('.test-title').on('click', function () {
+      var expandCollapseIcon = $(this).find('.expand-collapse');
+      $(this).next().toggle();
+      if(expandCollapseIcon.text() === '-') { expandCollapseIcon.text('+'); }
+      else { expandCollapseIcon.text('-'); }
+    });
+  });
+</script>
+<span class="report-title">Integration Test Report</span>
+<div class="options">
+  <span class="checkboxes">
+    <label><input type="checkbox" id="passed-checkbox" checked="checked" onchange="testFilter('passed')">Passed</label>
+    <label><input type="checkbox" id="failed-checkbox" checked="checked" onchange="testFilter('failed')">Failed</label>
+  </span>
+  <span class="expand-all">Expand All</span>
+  <span class="collapse-all">Collapse All</span>
+</div>
+<div class="summary">
+  <span class="summary-line">25 examples, 2 failed </span>
+(92.0% passed)
+  <span class="total-duration">Finished in 963s (16m 3s)</span>
+</div>
+<div class="test-title failed">
+  <span class="expand-collapse">-</span> Admin setting up email signups <span class="group-run-time">3m 52s</span>
+</div>
+<div class="tests-container">
+<div class="test passed">
+  Should validate email sign up modal and check storefront
+  <span class= "run-time">1m 27s</span>
+</div>
+<div class="test failed">
+  Should display the the news letter contact count and order contact count in dashboard
+  <span class= "run-time">2m 24s</span>
+  <div class="failed-exception">
+    <b>RuntimeError</b><br>
+    Email signup not activated<p>
+  </div>
+</div>
+</div>
+<div class="test-title failed">
+  <span class="expand-collapse">-</span> Admin Setting up Business Info and Changing domain Business info <span class="group-run-time">2m</span>
+</div>
+<div class="tests-container">
+<div class="test failed">
+  should be able to Add & Edit and Save General Business information and SEO Details
+  <span class= "run-time">1m 3s</span>
+  <div class="failed-exception">
+    <b>RSpec::Expectations::ExpectationNotMetError</b><br>
+    <br>expected: "MyOnlineBakeryBusiness1ec3dfc1478656e50e476c29c7a4322f"<br>     got: "EditMyOnlineBakeryBusinessdc41388a5bf4ee18722b83e15a1538cf"<br><br>(compared using ==)<br><p>
+  </div>
+</div>
+<div class="test passed">
+  should be able to Add and Cancel General Business information and SEO Details
+  <span class= "run-time">56s</span>
+</div>
+</div>
+<div class="test-title passed">
+  <span class="expand-collapse">-</span> Admin Setting up Business Info and Changing domain changing store url to a subdomain and launch storefront with the changed subdomain <span class="group-run-time">1m 59s</span>
+</div>
+<div class="tests-container">
+<div class="test passed">
+  should get changed to a subdomain that is not in use
+  <span class= "run-time">14s</span>
+</div>
+<div class="test passed">
+  should not get changed to a subdomain that is in use
+  <span class= "run-time">14s</span>
+</div>
+<div class="test passed">
+  should get changed to a subdomain that is punycode
+  <span class= "run-time">15s</span>
+</div>
+<div class="test passed">
+  should get changed to a subdomain that has multi subdomains
+  <span class= "run-time">14s</span>
+</div>
+<div class="test passed">
+  should not get changed to a subdomain that contains special characters
+  <span class= "run-time">20s</span>
+</div>
+<div class="test passed">
+  should not get changed to a subdomain that contains inner special characters
+  <span class= "run-time">16s</span>
+</div>
+<div class="test passed">
+  should not get changed to a subdomain that starts/ends with -
+  <span class= "run-time">23s</span>
+</div>
+</div>
+<div class="test-title passed">
+  <span class="expand-collapse">-</span> Admin Setting up Business Info and Changing domain changing store url to a domain <span class="group-run-time">0m 21s</span>
+</div>
+<div class="tests-container">
+<div class="test passed">
+  domain list dropdown should only contain the root domain
+  <span class= "run-time">21s</span>
+</div>
+</div>
+<div class="test-title passed">
+  <span class="expand-collapse">-</span> Admin Setting up Business Info and Changing domain country/region <span class="group-run-time">0m 29s</span>
+</div>
+<div class="tests-container">
+<div class="test passed">
+  enables language dropdown only for US
+  <span class= "run-time">29s</span>
+</div>
+</div>
+<div class="test-title passed">
+  <span class="expand-collapse">-</span> Admin Setting up Business Info and Changing domain business name with quotes <span class="group-run-time">2m 10s</span>
+</div>
+<div class="tests-container">
+<div class="test passed">
+  escapes quotes in confirmation emails
+  <span class= "run-time">2m 10s</span>
+</div>
+</div>
+<div class="test-title passed">
+  <span class="expand-collapse">-</span> Admin Setting up store design <span class="group-run-time">6m 42s</span>
+</div>
+<div class="tests-container">
+<div class="test passed">
+  Validate theme setting panel fields
+  <span class= "run-time">2m 50s</span>
+</div>
+<div class="test passed">
+  Should be able to remove the hero image
+  <span class= "run-time">28s</span>
+</div>
+<div class="test passed">
+  cancel theme setting changes and verify the changes are not saved
+  <span class= "run-time">35s</span>
+</div>
+<div class="test passed">
+  Media Gallery Should return 400 and invalid content type error if user tries to upload other than image mime type
+  <span class= "run-time">8s</span>
+</div>
+<div class="test passed">
+  String theme setting values should be encoded on storefront
+  <span class= "run-time">1m 5s</span>
+</div>
+<div class="test passed">
+  Theme Settings should have a length limit
+  <span class= "run-time">47s</span>
+</div>
+<div class="test passed">
+  Should be able to crop the hero image
+  <span class= "run-time">47s</span>
+</div>
+</div>
+<div class="test-title passed">
+  <span class="expand-collapse">-</span> Admin Setting up store design Theme settings values <span class="group-run-time">4m 15s</span>
+</div>
+<div class="tests-container">
+<div class="test passed">
+  Should be maintained between theme variations
+  <span class= "run-time">2m 16s</span>
+</div>
+<div class="test passed">
+  Should be maintained per theme
+  <span class= "run-time">1m 59s</span>
+</div>
+</div>
+<div class="test-title passed">
+  <span class="expand-collapse">-</span> Admin Setting up store design Manage image slider <span class="group-run-time">4m 49s</span>
+</div>
+<div class="tests-container">
+<div class="test passed">
+  Should be able to add slides, texts and drag and drop,crop,remove images
+  <span class= "run-time">3m 38s</span>
+</div>
+<div class="test passed">
+  should be able to slide images in storefront
+  <span class= "run-time">1m 10s</span>
+</div>
+</div>

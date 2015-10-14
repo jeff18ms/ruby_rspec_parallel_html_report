@@ -1,0 +1,25 @@
+
+#UI Locators for Amazon
+
+#Sign in form
+
+amz_input_email_id: {id: ap_email}
+amz_input_password: {id: ap_password}
+amz_sign_in_button: {id: signInSubmit}
+amz_authentication_alert: {css: ".a-alert-heading"}
+
+#Search
+amz_search_input_field: {id: twotabsearchtextbox}
+amz_search_icon: {css: ".nav-search-submit>input"}
+amz_search_results_container: {css: "#s-results-list-atf>li"}
+amz_searched_result_product_name: {css: "#s-results-list-atf>li:nth-child(replace)>div>div>div .a-col-right>div>a>h2"}
+
+
+#Cart
+amz_add_to_cart_button: {id: add-to-cart-button}
+amz_proceed_to_checkout_button: {id: hlb-ptc-btn-native}
+quantity_dropdown: {id: a-autoid-2-announce}
+amz_delete_item: {css: ".sc-action-delete>span>input"}
+amz_cart_icon: {css: ".nav-cart-icon.nav-sprite"}
+
+

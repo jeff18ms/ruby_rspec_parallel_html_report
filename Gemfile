@@ -1,0 +1,36 @@
+source 'https://rubygems.org'
+
+gem 'properties-ruby'
+gem 'selenium-webdriver'
+gem 'rspec-rails'
+gem 'rspec', '~> 3.3.0'
+gem 'cucumber'
+gem 'phantomjs'
+gem 'savon',"~> 1.2"
+gem 'nokogiri', '1.6.0'
+gem 'yarjuf'
+gem 'byebug'
+gem 'rspec_junit_formatter'
+gem 'rspec-extra-formatters'
+gem 'rest-client'
+gem 'certified'
+gem  'madison'
+gem 'gmail'
+gem 'mail'
+gem 'addressable'
+gem 'parallel_tests'
+gem 'i18n'
+gem 'deep_struct'
+gem 'hashugar'
+gem 'waitutil'
+gem 'ffaker'
+gem 'net-http-persistent'
+gem 'test-unit'
+gem 'madmimi', '~> 1.1.2'
+
+# Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
+gem 'rails','~> 4.0.5'
+gem 'ruby-mysql'
+
+
+

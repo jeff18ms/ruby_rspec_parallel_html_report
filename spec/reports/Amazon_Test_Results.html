@@ -1,0 +1,199 @@
+<style type="text/css">
+  body {
+    line-height: 1.15;
+    font-size: 0.8em;
+    font-family: Helvetica, Sans-Serif;
+  }
+
+  .report-title {
+    margin-left: 10px;
+    font-size: 2em;
+    font-weight: bold;
+  }
+
+  .options {
+    display: inline-block;
+  }
+
+  .checkboxes {
+    float: relative;
+  }
+
+  .expand-all, .collapse-all {
+    color: #07c;
+    margin: 0px 5px;
+  }
+
+  .expand-all {
+    display: none;
+  }
+
+  .expand-all:hover, .collapse-all:hover {
+    color: #0c65a5;
+    cursor: hand;
+  }
+
+  .summary {
+    overflow: hidden;
+    margin: 0px 10px 10px 10px;
+    padding: 10px;
+    font-size: 1.5em;
+    border: 2px solid black;
+  }
+
+  .summary-line {
+    font-weight: bold;
+  }
+
+  .total-duration {
+    float: right;
+  }
+
+  .test {
+    overflow: hidden;
+    word-wrap: break-word;
+    margin: 5px 5px 5px 15px;
+    padding: 5px;
+  }
+
+  .test .run-time {
+    float: right;
+  }
+
+  .test-title {
+    overflow: hidden;
+    margin: 15px 5px 5px 5px;
+    color: black;
+    font-weight: bold;
+    font-size: 1.2em;
+    padding: 5px;
+    border-bottom-left-radius: 5px;
+    border-top-right-radius: 5px;
+  }
+
+  .test-title:hover {
+    cursor: hand;
+  }
+
+  .test-title .expand-collapse {
+    padding: 0px 7px 0px 3px;
+    display: inline-block;
+    width: 7px;
+    text-align: center;
+    color: white;
+    text-shadow: 2px 2px rgba(0,0,0,0.75);
+  }
+
+  .group-run-time {
+    float: right;
+  }
+
+  .test-title.passed {
+    border-bottom: 3px solid #10EC10;
+    background-color: #90FF90;
+  }
+
+  .test-title.failed {
+    border-bottom: 3px solid #F76C6C;
+    background-color: #FFA7A7;
+  }
+
+  .test.passed {
+    border-left: 5px solid #00EE00;
+    background-color: #CCFFCC;
+  }
+
+  .test.failed {
+    border-left: 5px solid #FF6666;
+    background-color: #FFD0D0;
+  }
+
+  .test.pending {
+    border-left: 5px solid #FFAB66;
+    background-color: #FFE3CC;
+  }
+
+  .failed-exception {
+    background-color: rgba(255, 255, 255, 0.5);
+    margin: 10px;
+    padding: 5px;
+    font-family: Courier;
+    color: #E3170D;
+    border-radius: 5px;
+  }
+
+  .backtrace-line {
+    font-size: 1.05em;
+    color: black;
+  }
+</style>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+<script type="text/javascript">
+  $(function () {
+    window.testFilter = function (filter) {
+      $('.test.'+filter).toggle();
+    }
+
+    $('.expand-all').on('click', function () {
+      $('.tests-container').show();
+      $('.expand-collapse').text('-');
+      $(this).hide()
+      $('.collapse-all').show();
+    });
+
+    $('.collapse-all').on('click', function () {
+      $('.tests-container').hide();
+      $('.expand-collapse').text('+');
+      $(this).hide()
+      $('.expand-all').show();
+    });
+
+    $('.test-title').on('click', function () {
+      var expandCollapseIcon = $(this).find('.expand-collapse');
+      $(this).next().toggle();
+      if(expandCollapseIcon.text() === '-') { expandCollapseIcon.text('+'); }
+      else { expandCollapseIcon.text('-'); }
+    });
+  });
+</script>
+<span class="report-title">Integration Test Report</span>
+<div class="options">
+  <span class="checkboxes">
+    <label><input type="checkbox" id="passed-checkbox" checked="checked" onchange="testFilter('passed')">Passed</label>
+    <label><input type="checkbox" id="failed-checkbox" checked="checked" onchange="testFilter('failed')">Failed</label>
+  </span>
+  <span class="expand-all">Expand All</span>
+  <span class="collapse-all">Collapse All</span>
+</div>
+<div class="summary">
+  <span class="summary-line">4 examples, 0 failed </span>
+(100.0% passed)
+  <span class="total-duration">Finished in 37s (0m 37s)</span>
+</div>
+<div class="test-title passed">
+  <span class="expand-collapse">-</span> Amazon Search Item and Add to cart <span class="group-run-time">0m 27s</span>
+</div>
+<div class="tests-container">
+<div class="test passed">
+  Should be able to search a specified item
+  <span class= "run-time">15s</span>
+</div>
+<div class="test passed">
+  Should be able to add a product to cart 
+  <span class= "run-time">11s</span>
+</div>
+</div>
+<div class="test-title passed">
+  <span class="expand-collapse">-</span> Amazon Checkout <span class="group-run-time">0m 33s</span>
+</div>
+<div class="tests-container">
+<div class="test passed">
+  Should be able to delete the item
+  <span class= "run-time">19s</span>
+</div>
+<div class="test passed">
+  Should be able to see sign in page during checkout when not logged in
+  <span class= "run-time">14s</span>
+</div>
+</div>
