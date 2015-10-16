@@ -29,7 +29,7 @@ rake html_report['json_reports', QA_Results.html]
 ```
 - Just Pull this repo and bundle install and run the below rake task to see a HTML report under spec/reports
 ```
-rake html_report['json_reports_sample',Integration_Test_Results.html]
+rake html_report['json_reports_sample', Integration_Test_Results.html]
 ```
 
 Contributors
