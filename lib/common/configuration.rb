@@ -4,7 +4,7 @@ require_relative '../common/constants'
 module Configuration
   @@props = Utils::Properties.load_from_file (File.absolute_path(Constants::CONFIG_PROPERTIES))
 
-  def get_environment
+  def environment
     @@props.get(:ENV,true).to_s
   end
 
@@ -13,27 +13,27 @@ module Configuration
     @env
   end
 
-  def get_browser_type
+  def browser_type
     @@props.get(:BROWSER_TYPE,true)
   end
 
-  def get_driver_type
+  def driver_type
     @@props.get(:WEB_DRIVER_TYPE,true).to_sym
   end
 
-  def get_hub_ip
+  def hub_ip
     @@props.get(:HUB_IP,true).to_sym
   end
 
-  def get_hub_host
+  def hub_host
     @@props.get(:HUB_HOST,true).to_sym
   end
 
-  def get_sf_registered_user_name
+  def gmail_id
     @@props.get(:GMAIL_ID,true)
   end
 
-  def get_gmail_password
+  def gmail_password
     @@props.get(:GMAIL_PWD,true)
   end
 

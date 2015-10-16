@@ -5,19 +5,19 @@ module SeleniumWebdriver
   module WebDriverConnector
     @@default_wait_options = {:timeout => Constants::MEDIUM_TIMEOUT_VALUE}
 
-    def set_driver(browser = get_browser_type)
+    def set_driver(browser = browser_type)
       client = Selenium::WebDriver::Remote::Http::Default.new
       client.timeout = 120
 
-      if get_driver_type == :local
+      if driver_type == :local
         @driver = Selenium::WebDriver.for(browser.to_sym,:http_client =>client)
         @driver.manage.timeouts.script_timeout = Constants::FORTY_FIVE_SECOND_TIMEOUT_VALUE
         browser
-      elsif get_driver_type == :remote
+      elsif driver_type == :remote
         capabilities = Selenium::WebDriver::Remote::Capabilities.send(browser.to_sym)
 
         @driver = Selenium::WebDriver.for(
-            :remote,url: "http://#{get_hub_ip}:4444/wd/hub",
+            :remote,url: "http://#{hub_ip}:4444/wd/hub",
             desired_capabilities: capabilities,
             :http_client =>client,
         )
@@ -31,7 +31,7 @@ module SeleniumWebdriver
     end
 
     def shutdown_selenium_server
-      response = RestClient.get "#{get_hub_ip}/lifecycle-manager?action=shutdown"
+      response = RestClient.get "#{hub_ip}/lifecycle-manager?action=shutdown"
       if response.code!= 200
         #invoke command
       end
@@ -61,7 +61,7 @@ module SeleniumWebdriver
 
     def set_file_path_in_HTML_file_input_field(locator, file_path)
      set_DOM_attribute(locator,'style','display:block')
-     if get_driver_type == :local
+     if driver_type == :local
        abs_file_path = File.absolute_path(file_path)
        set_text_without_clear(locator, abs_file_path)
      else
@@ -96,7 +96,7 @@ module SeleniumWebdriver
     end
 
     def quit_webdriver
-      if get_driver_type != :local || quit_local_driver?
+      if driver_type != :local
         alert_accept
         @driver.quit
       end
@@ -212,7 +212,7 @@ module SeleniumWebdriver
 
     def wait_for_page_load(wait_time=Constants::LONG_TIMEOUT_VALUE)
       begin
-        if get_environment == 'local'
+        if environment == 'local'
           wait = set_webdriver_timeout(Constants::TOO_LONG_TIMEOUT_VALUE,"Page was not loaded in #{Constants::TOO_LONG_TIMEOUT_VALUE} seconds")
         else
           wait = set_webdriver_timeout(wait_time,"Page was not loaded in #{Constants::LONG_TIMEOUT_VALUE} seconds")
