@@ -20,11 +20,17 @@ CI/CD
 Run!
 ====
 - To run the integration tests using parallel_tests from this repo
-```rake integration_tests[2]```
+```
+rake integration_tests[2]
+```
 - To Generate the HTML Report(pass 2 optional params 1. json report directory and 2. HTML file name. If not, default values will be passed)
-```rake html_report['json_reports', QA_Results.html]```
+```
+rake html_report['json_reports', QA_Results.html]
+```
 - Just Pull this repo and bundle install and run the below rake task to see a HTML report under spec/reports
-```rake html_report['json_reports_sample',Integration_Test_Results.html]```
+```
+rake html_report['json_reports_sample',Integration_Test_Results.html]
+```
 
 Contributors
 ============
