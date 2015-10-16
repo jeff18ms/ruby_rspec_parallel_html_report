@@ -21,7 +21,7 @@ end
 desc "Parse RSpec json reports and generate HTML report"
 task :html_report, :json_report_path, :html_report_file_name do |t,args|
 
-  json_files_report_dir = args.json_report_path ||= 'jsonreports'
+  json_files_report_dir = args.json_report_path ||= 'json_reports'
 
   json_files = "#{json_files_report_dir}/*.json"
   html_report_file = "spec/reports/#{args.html_report_file_name ||='RSpec_test_report.html'}"

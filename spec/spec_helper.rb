@@ -26,8 +26,8 @@ require 'madmimi'
 
 
 Dir[File.expand_path('lib/common/*.rb')].each { |f| require f }
-require_relative  '../page_objects_and_ui_html_locators/page_objects_aggregator'
-Dir[File.expand_path('page_objects_and_ui_html_locators/pageobjects/amazon/*.rb')].each { |f| require f }
+require_relative  '../lib/page_objects_aggregator'
+Dir[File.expand_path('lib/page_objects/amazon/*.rb')].each { |f| require f }
 Dir[File.expand_path('spec/helpers/amazon/*.rb')].each { |f| require f }
 
 

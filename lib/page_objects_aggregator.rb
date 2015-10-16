@@ -1,5 +1,5 @@
 require_relative '../spec/spec_helper'
-require_relative '../page_objects_and_ui_html_locators/yaml_properties_holder'
+require_relative '../lib/yaml_properties_holder'
 
 class AmazonPageObjects
   def self.properties_file
