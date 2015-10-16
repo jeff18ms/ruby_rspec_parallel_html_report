@@ -7,7 +7,7 @@ module Constants
   # PAGE OBJECTS FILE PATH       |
   #-------------------------------
 
-  AMAZON_PAGE_OBJECTS = 'lib/ui_locators/amazon/amazon.yml'
+  AMAZON_PAGE_LOCATORS = 'lib/ui_locators/amazon/amazon.yml'
   CONFIG_PROPERTIES = 'config/QAconfig.properties'
 
   #-------------------

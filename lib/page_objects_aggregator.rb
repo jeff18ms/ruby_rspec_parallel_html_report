@@ -3,7 +3,7 @@ require_relative '../lib/yaml_properties_holder'
 
 class AmazonPageObjects
   def self.properties_file
-    Constants.const_get(:AMAZON_PAGE_OBJECTS)
+    Constants.const_get(:AMAZON_PAGE_LOCATORS)
   end
   extend YAMLPropertiesHolder
 end
