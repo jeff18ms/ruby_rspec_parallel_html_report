@@ -3,20 +3,6 @@ require 'yarjuf'
 require 'rake/testtask'
 require 'json'
 
-desc "Parallel Tests"
-task :integration_tests,:thread_count do |t,args|
-  files_to_run = []
-  Dir['spec/integration/amazon/*'].each do |fname|
-    files_to_run.push(fname)
-  end
-
-  spec_files = []
-  files_to_run.each { |glob| spec_files += Dir[glob] }
-  sh %{parallel_rspec -n #{args.thread_count} #{spec_files.join(" ")}}
-
-end
-
-
 #Task to parse the JSON report and generate HTML repport
 desc "Parse RSpec json reports and generate HTML report"
 task :html_report, :json_report_path, :html_report_file_name do |t,args|
@@ -24,7 +10,7 @@ task :html_report, :json_report_path, :html_report_file_name do |t,args|
   json_files_report_dir = args.json_report_path ||= 'json_reports'
 
   json_files = "#{json_files_report_dir}/*.json"
-  html_report_file = "spec/reports/#{args.html_report_file_name ||='RSpec_test_report.html'}"
+  html_report_file = "tmp/#{args.html_report_file_name ||='RSpec_test_report.html'}"
 
   compiled_hash = { groups: {},
                     summary: { duration: 0,
@@ -237,7 +223,7 @@ EOF
     formatted_duration.slice!(' 0s')
     formatted_duration.strip!
 
-    f.puts "<span class=\"report-title\">Integration Test Report</span>"
+    f.puts "<span class=\"report-title\">Rspec Test Report</span>"
     f.puts "<div class=\"options\">"
     f.puts "  <span class=\"checkboxes\">"
     f.puts "    <label><input type=\"checkbox\" id=\"passed-checkbox\" checked=\"checked\" onchange=\"testFilter('passed')\">Passed</label>"
